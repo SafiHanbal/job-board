@@ -29,3 +29,7 @@ Route::delete("logout", fn () => to_route('auth.destroy'))->name('logout');
 Route::delete('auth', [AuthController::class, 'destroy'])
     ->name('auth.destroy');
 
+Route::middleware('auth')->group(function () {
+    Route::resource('jobs.application', JobApplicationController::class)
+        ->only(['create', 'store']);
+});
